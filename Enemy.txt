@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour {
+
+  public float speed;
+  public int health = 20;
+  public int damage = 1;
+  public int bounty = 5;
+
+  // The current target the enemy is going towards
+  protected Transform target;
+  protected int wavepointIndex = 0;
+  protected UIEvents events;
+  protected GameState state;
+
+  // Use this for initialization
+  void Start()
+  {
+    target = Waypoints.points[0];
+    transform.LookAt(target);
+    events = GameObject.Find("/GameMaster").GetComponent<UIEvents>();
+    state = GameObject.Find("/GameMaster").GetComponent<GameState>();
+  }
+
+  // Update is called once per frame
+  protected void Update ()
+  {
+    Vector3 dir = target.position - transform.position;
+    transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+
+    if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+    {
+      GetNextWaypoint();
+    }
+
+    if (health < 0)
+    {
+      Destroy(gameObject);
+      // add money by bounty value
+      state.playerMoney += this.bounty;
+      return;
+    }
+	}
+
+  protected void GetNextWaypoint()
+  {
+    if (wavepointIndex >= Waypoints.points.Count - 1)
+    {
+      events.onEnemyAttack(damage);
+      Destroy(gameObject);
+      return;
+    }
+
+    wavepointIndex++;
+    // Set the new target
+    target = Waypoints.points[wavepointIndex];
+    // Turn towards the new target
+    transform.LookAt(target);
+  }
+}

@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Apolcalypse : Enemy {
+  public Transform enemyPrefab;
+  public Transform mortarCyclePrefab;
+  private int end = 3;
+	
+	// Update is called once per frame
+	void Update () {
+    Vector3 dir = target.position - transform.position;
+    transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+
+    if (Vector3.Distance(transform.position, target.position) <= 0.4f)
+    {
+      GetNextWaypoint();
+    }
+    // if it dies, spawn 2 mortar cycles and 3 Strykers
+    if (health < 0)
+    {
+      Destroy(gameObject);
+      for (int i=0; i<end; i++)
+      {
+        transform.Translate(dir.normalized * speed * (Time.deltaTime + i), Space.World);
+        StartCoroutine(deathSpawn());
+      }
+
+    }
+  }
+  IEnumerator deathSpawn()
+  {
+    WaveSpawner.spawnEnemy(enemyPrefab, transform);
+    WaveSpawner.spawnEnemy(mortarCyclePrefab, transform);
+    yield return new WaitForSeconds(0.25f);
+  }
+}

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7939c29fb4a08a449bd53936ac898a1d
+timeCreated: 1509908159
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - partToRotate: {instanceID: 0}
+  - bulletPrefab: {instanceID: 0}
+  - firePoint: {instanceID: 0}
+  - iceAOEPrefab: {fileID: 4352701948035240, guid: 361f9f35bf2218a4cb420c7af69f5278,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
