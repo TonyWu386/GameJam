@@ -1,5 +1,15 @@
 # GameJam
-Very simple Tower Defense Game made in Unity in 2 days. Thanks to Tony Wu for collaboration.
+This is a first-person tower defense game made during a weekend game jam. It was developed in Unity with C#.
+
+Original Team:
+
+Tony Wu
+
+[Jerry Chang](https://github.com/jerryc96)
+
+[Jimmy Li](https://github.com/jimmyzmli)
+
+Sean Lo
 
 Game consists of 5 levels with 5 different unique enemy types and four towers.
 
